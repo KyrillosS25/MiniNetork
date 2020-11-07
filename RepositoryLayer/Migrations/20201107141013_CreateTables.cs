@@ -59,7 +59,8 @@ namespace RepositoryLayer.Migrations
                 name: "Post",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Text = table.Column<string>(nullable: false),
                     ImagePath = table.Column<string>(nullable: false),
                     PersonId = table.Column<int>(nullable: false)
@@ -68,8 +69,8 @@ namespace RepositoryLayer.Migrations
                 {
                     table.PrimaryKey("PK_Post", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Post_Person_Id",
-                        column: x => x.Id,
+                        name: "FK_Post_Person_PersonId",
+                        column: x => x.PersonId,
                         principalTable: "Person",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -110,6 +111,11 @@ namespace RepositoryLayer.Migrations
                 column: "UserId",
                 unique: true,
                 filter: "[UserId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Post_PersonId",
+                table: "Post",
+                column: "PersonId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_React_PostId",

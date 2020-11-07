@@ -19,7 +19,7 @@ namespace WebAPI.Mapping
 
 
             CreateMap<PostResource, Post>();
-            CreateMap<CreatePostResource, Post>();
+            CreateMap<CreatePostResource, Post>().ForMember(x=>x.Id, opt => opt.Ignore());
             CreateMap<List<PostResource>, List<Post>>();
             CreateMap<ReactResource, React>();
         }

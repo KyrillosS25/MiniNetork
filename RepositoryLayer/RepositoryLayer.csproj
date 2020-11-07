@@ -37,6 +37,8 @@
     <Compile Remove="Migrations\20201106165221_CreateTables.Designer.cs" />
     <Compile Remove="Migrations\20201106171959_CreateTables.cs" />
     <Compile Remove="Migrations\20201106171959_CreateTables.Designer.cs" />
+    <Compile Remove="Migrations\20201106182800_CreateTables.cs" />
+    <Compile Remove="Migrations\20201106182800_CreateTables.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

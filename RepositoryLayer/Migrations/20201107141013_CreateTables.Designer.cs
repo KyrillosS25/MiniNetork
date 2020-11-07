@@ -10,7 +10,7 @@ using RepositoryLayer;
 namespace RepositoryLayer.Migrations
 {
     [DbContext(typeof(MiniNetworkDBContext))]
-    [Migration("20201106182800_CreateTables")]
+    [Migration("20201107141013_CreateTables")]
     partial class CreateTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -126,7 +126,9 @@ namespace RepositoryLayer.Migrations
             modelBuilder.Entity("DataAccessLayer.Entities.Post", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ImagePath")
                         .IsRequired()
@@ -140,6 +142,8 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PersonId");
 
                     b.ToTable("Post");
                 });
@@ -320,7 +324,7 @@ namespace RepositoryLayer.Migrations
                 {
                     b.HasOne("DataAccessLayer.Entities.Person", "Person")
                         .WithMany("Posts")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
